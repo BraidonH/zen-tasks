@@ -11,29 +11,29 @@ function App() {
   const dispatch = useDispatch();
   const weather = useSelector((state) => state.weather.weather);
 
-  // useEffect(() => {
-  //   const API_KEY = "a4ba9037e7471951b7fbff9b63adc05d";
-  //   const options = {
-  //     enableHighAccuracy: true,
-  //     timeout: 5000,
-  //     maximumAge: 0,
-  //   };
-  //   function success(pos) {
-  //     const crd = pos.coords;
-  //     fetch(
-  //       `https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=${API_KEY}`
-  //     )
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         dispatch(addWeather(data));
-  //       });
-  //   }
-  //   function error(err) {
-  //     console.warn(`ERROR(${err.code}): ${err.message}`);
-  //   }
-  //   console.log(weather);
-  //   navigator.geolocation.getCurrentPosition(success, error, options);
-  // }, []);
+  useEffect(() => {
+    const API_KEY = "YOUR_API_KEY";
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+    function success(pos) {
+      const crd = pos.coords;
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=${API_KEY}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          dispatch(addWeather(data));
+        });
+    }
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+    console.log(weather);
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  }, []);
 
   return (
     <div className="App">
